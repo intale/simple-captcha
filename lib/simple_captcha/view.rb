@@ -88,15 +88,15 @@ module SimpleCaptcha #:nodoc
    
       def generate_simple_captcha_data(code)
         value = ''
-        
         case code
-          when 'numeric' then 
-            SimpleCaptcha.length.times{value << (48 + rand(10)).chr}
+          when 'numeric'
+            SimpleCaptcha.length.times { value << (48 + rand(10)).chr }
+          when 'mixing'
+            SimpleCaptcha.length.times { value << [(48 + rand(10)),(65 + rand(26))][rand(2)].chr }
           else
-            SimpleCaptcha.length.times{value << (65 + rand(26)).chr}
+            SimpleCaptcha.length.times { value << (65 + rand(26)).chr }
         end
-        
-        return value
+        value
       end
       
       def simple_captcha_key(key_name = nil)
